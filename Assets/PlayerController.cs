@@ -33,8 +33,8 @@ public class PlayerController : MonoBehaviour
 
         if(movement.magnitude > 0.1f )
         {
-            Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
-            rb.MoveRotation(targetRotation);
+            //Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
+            //rb.MoveRotation(targetRotation);
         }
 
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
