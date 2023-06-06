@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class bulletScript : MonoBehaviour
 {
+    private Vector3 direction;
     public float speed = 10f;
     public int damage = 1;
     public GameObject impactEffect;
@@ -39,5 +40,10 @@ public class bulletScript : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetDirection(Vector3 dir)
+    {
+        direction = dir.normalized;
     }
 }
