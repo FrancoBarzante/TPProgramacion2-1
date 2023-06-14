@@ -19,7 +19,7 @@ public class bulletScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
