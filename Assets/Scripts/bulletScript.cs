@@ -11,9 +11,9 @@ public class bulletScript : MonoBehaviour
     public GameObject impactEffect;
 
     // Start is called before the first frame update
-    private void Start()
+    private void Awake()
     {
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 0.15f);
     }
 
     // Update is called once per frame
@@ -45,5 +45,16 @@ public class bulletScript : MonoBehaviour
     public void SetDirection(Vector3 dir)
     {
         direction = dir.normalized;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            
+           
+            Destroy(collision.gameObject);
+            Destroy(gameObject, 0.5f);
+        }
     }
 }
