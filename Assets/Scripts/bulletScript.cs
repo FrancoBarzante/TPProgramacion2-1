@@ -49,12 +49,13 @@ public class bulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<Interfaz>() != null)
         {
-            
-           
-            Destroy(collision.gameObject);
-            Destroy(gameObject, 0.5f);
+
+            Interfaz obeto = collision.gameObject.GetComponent<Interfaz>();
+            obeto.TakeDamage(damage);
+
+
         }
     }
 }

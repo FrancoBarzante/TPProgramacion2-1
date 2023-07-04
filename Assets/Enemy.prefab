@@ -116,6 +116,9 @@ MonoBehaviour:
   deathEffect: {fileID: 381258361669336365, guid: f308afbcc1099d0438864998fa9f0421, type: 3}
   playerTag: Player
   chaseRange: 10
+  speed: 3
+  currentHealth: 0
+  navMeshAgent: {fileID: 0}
 --- !u!195 &1615864652072583553
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -8,9 +8,20 @@ public class EnemyFly : Enemy
     public float speedMultiplier = 1.5f; // Factor de multiplicación de velocidad
     public int extraHealth = 2; // Vida adicional
 
-    private void Start()
+    protected override void Start()
     {
-        currentHealth = maxHealth + extraHealth; // Establece la vida inicial sumando el valor extraHealth
-        navMeshAgent.speed *= speedMultiplier; // Aumenta la velocidad multiplicando el valor speedMultiplier
+        base.Start();
+        currentHealth = extraHealth;        
+        navMeshAgent.speed *= speedMultiplier;// Multiplica la velocidad del NavMeshAgent del hijo de Enemy
     }
+
+    public override void TakeDamage(int damage)
+    {
+        Debug.Log("Logica Nueva");
+        base.TakeDamage(damage);
+    }
+
+    
+
+
 }

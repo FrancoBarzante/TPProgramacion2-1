@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour , Interfaz
 {
     public int maxHealth = 3;
     public GameObject deathEffect;
     public string playerTag = "Player"; // Etiqueta del objeto que el enemigo seguirá
     public float chaseRange = 10f; // Rango de distancia para comenzar a perseguir al jugador
+    public float speed = 3f;
 
 
     public int currentHealth;
@@ -16,12 +17,13 @@ public class Enemy : MonoBehaviour
     private GameObject player;
      
 
-    // Start is called before the first frame update
-    private void Start()
+    
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
-        player= GameObject.FindGameObjectWithTag(playerTag);
+        player = GameObject.FindGameObjectWithTag(playerTag);
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = speed;
     }
 
     private void Update()
@@ -41,20 +43,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
+  
 
-        if(currentHealth < 0)
-        {
-            Die();
-        }
-
-        Debug.Log(damage);
-    }
-
-    private void Die()
+    public virtual void Die()
     {
         if(deathEffect != null)
         {
@@ -62,5 +53,17 @@ public class Enemy : MonoBehaviour
         }
 
         Destroy(this.gameObject);
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth < 0)
+        {
+            Die();
+        }
+
+        Debug.Log(damage);
     }
 }
