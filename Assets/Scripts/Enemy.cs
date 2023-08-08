@@ -10,14 +10,16 @@ public class Enemy : MonoBehaviour , Interfaz
     public string playerTag = "Player"; // Etiqueta del objeto que el enemigo seguirá
     public float chaseRange = 10f; // Rango de distancia para comenzar a perseguir al jugador
     public float speed = 3f;
-
+    public bool IsAlive { get; private set; } = true;
 
     public int currentHealth;
     public NavMeshAgent navMeshAgent;
     private GameObject player;
-     
 
-    
+    public int damageAmount = 1;
+
+
+
     protected virtual void Start()
     {
         currentHealth = maxHealth;
@@ -43,14 +45,30 @@ public class Enemy : MonoBehaviour , Interfaz
         }
     }
 
-  
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.TakeDamage(damageAmount);
+            }
+        }
+    }
+
+
 
     public virtual void Die()
     {
-        if(deathEffect != null)
+        IsAlive = false;
+
+        if (deathEffect != null)
         {
             Instantiate(deathEffect, transform.position, transform.rotation);
         }
+
+        
 
         Destroy(this.gameObject);
     }

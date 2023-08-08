@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class PlayerController : MonoBehaviour
     public Transform firePoint;
     public float fireRate = 0.5f;
     public float bulletSpeed = 10f;
+    public int maxHealth = 3;
+    private int currentHealth;
+
+    
 
 
 
@@ -20,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -51,6 +57,21 @@ public class PlayerController : MonoBehaviour
        
         
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        SceneManager.LoadScene("deathScene");
+    }
+
 
     private void Shoot()
     {
